@@ -1,11 +1,10 @@
-// components/GifList.tsx
 import React from 'react';
 import {useSelector} from 'react-redux';
 import {FlatList, Image, View, StyleSheet} from 'react-native';
 import ShimmerPlaceholder from 'react-native-shimmer-placeholder';
 
 const GifList = () => {
-  const gifs = useSelector((state: any) => state.gifs); // Adjust the type based on the actual structure of your GIF object
+  const gifs = useSelector((state: any) => state.gifs);
   const isLoading = useSelector((state: any) => state.isLoading);
 
   const renderItem = ({item}: {item: any}) => (
@@ -19,7 +18,7 @@ const GifList = () => {
 
   return (
     <View style={styles.container}>
-      {isLoading ? (
+      {gifs.length === 0 ? (
         <FlatList
           data={[{id: 'placeholder'}]}
           keyExtractor={keyExtractor}
