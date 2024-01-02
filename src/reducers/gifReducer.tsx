@@ -1,14 +1,13 @@
-// reducers/gifReducer.ts
 interface GifState {
-  gifs: any[]; // Adjust the type based on the actual structure of your GIF object
+  gifs: any[];
   isLoading: boolean;
-  initialLoad: boolean; // Add initialLoad property
+  initialLoad: boolean;
 }
 
 const initialState: GifState = {
   gifs: [],
   isLoading: false,
-  initialLoad: true, // Set initialLoad to true initially
+  initialLoad: true,
 };
 
 const gifReducer = (state = initialState, action: any) => {
@@ -18,13 +17,12 @@ const gifReducer = (state = initialState, action: any) => {
         ...state,
         gifs: action.payload,
         isLoading: false,
-        initialLoad: false, // Set initialLoad to false when GIFs are loaded
+        initialLoad: false,
       };
     case 'SET_LOADING':
       return {
         ...state,
         isLoading: action.payload,
-        // Keep initialLoad as it is for other loading states
       };
     default:
       return state;

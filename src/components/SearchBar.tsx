@@ -1,7 +1,7 @@
 import React, {useState, useCallback} from 'react';
 import {TextInput, View} from 'react-native';
 import {useDispatch} from 'react-redux';
-import {searchGifs} from '../actions/gifActions';
+import {searchGifs, ThunkResult} from '../actions/gifActions';
 
 const SearchBar = () => {
   const [query, setQuery] = useState<string>('');
@@ -10,7 +10,7 @@ const SearchBar = () => {
   const handleSearch = useCallback(
     (text: string) => {
       setQuery(text);
-      dispatch(searchGifs(text));
+      dispatch(searchGifs(text) as ThunkResult<void>);
     },
     [dispatch],
   );

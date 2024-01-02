@@ -18,7 +18,7 @@ const GifList = () => {
   const keyExtractor = (item: any) => item.id.toString();
 
   return (
-    <View>
+    <View style={styles.container}>
       {isLoading ? (
         <FlatList
           data={[{id: 'placeholder'}]}
@@ -48,10 +48,13 @@ const GifList = () => {
 
 const styles = StyleSheet.create({
   gifImage: {
-    width: 200,
-    height: 200,
+    width: 300,
+    height: 300,
     margin: 5,
     borderRadius: 8, // Add a border radius for a more appealing look
+  },
+  container: {
+    alignItems: 'center',
   },
 });
 
