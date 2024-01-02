@@ -1,17 +1,25 @@
-import React, {useState, useCallback} from 'react';
+import React, {useState, useCallback, useEffect} from 'react';
 import {Platform, StyleSheet, TextInput, View} from 'react-native';
 import {useDispatch} from 'react-redux';
 import {searchGifs, ThunkResult} from '../actions/gifActions';
+import debounce from 'lodash/debounce';
 
 const SearchBar = () => {
   const [query, setQuery] = useState<string>('');
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    if (query) {
+      handleSearch(query);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [query]);
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleSearch = useCallback(
-    (text: string) => {
-      setQuery(text);
+    debounce((text: string) => {
       dispatch(searchGifs(text) as ThunkResult<void>);
-    },
+    }, 1500),
     [dispatch],
   );
 
@@ -21,7 +29,7 @@ const SearchBar = () => {
         style={styles.input}
         placeholder="Search for GIFs"
         value={query}
-        onChangeText={handleSearch}
+        onChangeText={text => setQuery(text)}
         placeholderTextColor="#888"
         autoCapitalize="none"
         autoCorrect={false}
